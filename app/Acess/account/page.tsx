@@ -8,14 +8,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-
+import { createUser } from '@/app/api/createUser'
 
 //validando campos
 const accountLoginSchema=z.object({
     email:z.string().email('Formato do email inválido'),
     password:z.string().min(6,'Senha precisa de no minímo 6 caracteres'),
-    confirm:z.string().min(6,'Senha precisa de no minímo 6 caracteres')
-
+    confirm:z.string()
      })
  //tipando o objeto de validação
  type accountFormData=z.infer<typeof accountLoginSchema>
@@ -26,17 +25,28 @@ export default function Account(){
     const {register,handleSubmit,formState:{errors}}=useForm<accountFormData>({
           resolver:zodResolver(accountLoginSchema)})
 
-function accountLogin(data:accountFormData )
+async function accountLogin(data:accountFormData )
     { 
-   
-        if(data.password == data.confirm)
-        {
-        SetOutput(JSON.stringify(data,null, 2))
+  
+       
+        try {
 
-        window.history.go(-2);
-
-        }else{
-            SetOutput(JSON.stringify("Senhas Não conferem",null,2))
+            if(data.password == data.confirm)
+            {
+                await createUser({
+                    email:data.email,
+                    password:data.password,
+                 
+                })
+                console.log(data)
+                window.history.go(-2);
+               
+            }else{
+                SetOutput(JSON.stringify("Senhas Não conferem",null,2))
+            }
+        } catch (error) {
+            
+            
         }
         
        }
