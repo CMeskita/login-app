@@ -17,41 +17,44 @@ const accountLoginSchema=z.object({
     confirm:z.string()
      })
  //tipando o objeto de validação
- type accountFormData=z.infer<typeof accountLoginSchema>
+ export type accountFormData=z.infer<typeof accountLoginSchema>
 
 export default function Account(){
 
-    const [output, SetOutput]=useState('')
-    const {register,handleSubmit,formState:{errors}}=useForm<accountFormData>({
-          resolver:zodResolver(accountLoginSchema)})
+    const signUpForm = useForm<accountFormData>({
+        resolver: zodResolver(accountLoginSchema),
+      })
+    
+      const {
+        handleSubmit,
+        formState: { errors },
+        reset,
+        register,
+      } = signUpForm
 
+    const [output, SetOutput]=useState('')
+ 
 async function accountLogin(data:accountFormData )
     { 
-  
-       
+
         try {
 
             if(data.password == data.confirm)
             {
                 await createUser({
                     email:data.email,
-                    password:data.password,
-                 
+                    password:data.password                 
                 })
-                console.log(data)
-                window.history.go(-2);
+                //console.log(data)
+                //window.history.go(-2);
+                reset()
                
             }else{
                 SetOutput(JSON.stringify("Senhas Não conferem",null,2))
+                reset()
             }
-        } catch (error) {
-            
-            
-        }
-        
+        } catch (error) {}        
        }
-
-
     return(
 
         <div className='text-center ite sm:text-left min-[320px]:text-center max-[600px]:bg-sky-300'>     

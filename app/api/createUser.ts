@@ -11,7 +11,7 @@ interface UserResponse{
 }
 
 export async function createUser(data: IUserProps) {
-    const url = new URL('/api/v1/User', process.env.NEXT_PUBLIC_API_HOST)
+    const url = new URL(`${process.env.NEXT_PUBLIC_API_HOST}/api/v1/User`)
 
     const headers = new Headers({
         'Content-type': 'application/json',
