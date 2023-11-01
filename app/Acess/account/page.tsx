@@ -36,16 +36,17 @@ export default function Account(){
  
 async function accountLogin(data:accountFormData )
     { 
-
+debugger;
         try {
 
             if(data.password == data.confirm)
-            {
+            {    console.log(data)
                 await createUser({
+                
                     email:data.email,
                     password:data.password                 
                 })
-                //console.log(data)
+                console.log(data)
                 //window.history.go(-2);
                 reset()
                
