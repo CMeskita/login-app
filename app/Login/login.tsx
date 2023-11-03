@@ -1,3 +1,4 @@
+import { loginUser } from "@/app/api/loginUser";
 import { Button } from "@/app/components/Buttons/Button";
 import { Card } from "@/app/components/Cards/Card";
 import { FormaRedonda } from "@/app/components/Formas/FormaRedonda";
@@ -9,32 +10,48 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 //validando campos
-const createLoginSchema=z.object({
+const LoginSchema=z.object({
    email:z.string().email('Formato do email inválido'),
    password:z.string().min(6,'Senha precisa de no minímo 6 caracteres')
     })
 //tipando o objeto de validação
-type createLoginFormData=z.infer<typeof createLoginSchema>
+type LoginFormData=z.infer<typeof LoginSchema>
     
     
 export function Login(){
     //criando constantes de validação
+    const signUpForm = useForm<LoginFormData>({
+        resolver: zodResolver(LoginSchema),
+      })
+    
+      const {
+        handleSubmit,
+        formState: { errors },
+        reset,
+        register,
+      } = signUpForm
 
     const [output, SetOutput]=useState('')
-    const {register,handleSubmit,formState:{errors}}=useForm<createLoginFormData>({
-          resolver:zodResolver(createLoginSchema)})
 //criando função para receber os dados
-          function acessLogin(data:createLoginFormData ){ 
-            if(data.password=='123456' && data.email=='danielle.cmesquita@gmail.com')
-            {
-            SetOutput(JSON.stringify(data,null, 2))
 
-            }else{
-                SetOutput(JSON.stringify(data,null,"Error"))
-            }
+ async function acessLogin(data:LoginFormData )
+ { 
+    debugger;
+    try {
+
+           console.log(data)
+            await loginUser({
             
-           }
-
+                email:data.email,
+                password:data.password                 
+            })
+            console.log(data)
+            //window.history.go(-2);
+            reset()
+            SetOutput(JSON.stringify("Logado com sucesso!!!",null,2))
+        
+    } catch (error) {}    
+ }
     return(
          
     <div className='text-center ite sm:text-left min-[320px]:text-center max-[600px]:bg-sky-300'>     
