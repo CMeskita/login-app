@@ -7,7 +7,7 @@ import {InputCheckbox} from "@/app/components/Inputs/InputCheckbox";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { boolean, z } from "zod";
 
 //validando campos
 const LoginSchema=z.object({
@@ -36,6 +36,7 @@ export function Login(){
 
  async function acessLogin(data:LoginFormData )
  { 
+   
     debugger;
     try {
 
@@ -43,7 +44,8 @@ export function Login(){
             await loginUser({
             
                 email:data.email,
-                password:data.password                 
+                password:data.password,  
+                              
             })
             console.log(data)
             //window.history.go(-2);

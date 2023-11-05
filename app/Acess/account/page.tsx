@@ -1,5 +1,5 @@
 "use client"
-import { Login } from "@/app/Login/login";
+import { Login } from "@/app/Acess/Login/login";
 import { Button } from "@/app/components/Buttons/Button";
 import { Card } from "@/app/components/Cards/Card";
 import { FormaRedonda } from "@/app/components/Formas/FormaRedonda";

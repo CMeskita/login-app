@@ -26,7 +26,7 @@ export default function Forgout(){
 
     function forgoutLogin(data:forgoutFormData ){ 
    
-            SetOutput(JSON.stringify(data,null,"Error"))
+            SetOutput(JSON.stringify(data,null,"Enviado "))
     
         
        }

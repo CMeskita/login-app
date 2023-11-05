@@ -8,6 +8,7 @@ interface IUserProps{
 interface UserResponse{
     statusCode: number
     message: string
+    typeperson:boolean
 }
 
 export async function createUser(data: IUserProps) {
