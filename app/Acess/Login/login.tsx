@@ -1,9 +1,10 @@
 import { loginUser } from "@/app/api/loginUser";
 import { Button } from "@/app/components/Buttons/Button";
 import { Card } from "@/app/components/Cards/Card";
-import { FormaRedonda } from "@/app/components/Formas/FormaRedonda";
+
 import { Input } from "@/app/components/Inputs/Input";
 import {InputCheckbox} from "@/app/components/Inputs/InputCheckbox";
+import { FormaRedonda } from "@/app/components/Shapes/FormaRedonda";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";

@@ -1,7 +1,7 @@
 "use client"
 import { Button } from "@/app/components/Buttons/Button"
 import { Card } from "@/app/components/Cards/Card"
-import { FormaRedonda } from "@/app/components/Formas/FormaRedonda"
+import { FormaRedonda } from "@/app/components/Shapes/FormaRedonda"
 import { Input } from "@/app/components/Inputs/Input"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useState } from "react"
