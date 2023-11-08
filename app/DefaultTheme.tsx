@@ -1,5 +1,4 @@
 import '@radix-ui/themes/styles.css';
-import { Theme, Button } from '@radix-ui/themes'
 import { ReactNode } from 'react';
 
 
@@ -8,13 +7,20 @@ interface IDefaultLayoutProps {
   }
 export default function DefaultLayout({children}:IDefaultLayoutProps) {
     return(
-        <Theme
-        accentColor="mint"
-        grayColor="gray"
-        panelBackground="solid"
-        scaling="100%"
-        radius="full">
-            
-        </Theme>
+        <div className='mx-auto m-10'>
+            {children}
+        </div>
     )
 }
+interface IDefaultLayoutLoginProps {
+    children: ReactNode | ReactNode[]
+  }
+  export  function DefaultLayoutLogin({children}:IDefaultLayoutLoginProps) {
+    return(
+        <div className='max-w-sm mx-auto m-10'>
+            {children}
+        </div>
+    )
+}
+
+

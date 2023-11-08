@@ -1,3 +1,4 @@
+import DefaultLayout, { DefaultLayoutLogin } from "@/app/DefaultTheme";
 import { loginUser } from "@/app/api/loginUser";
 import { Button } from "@/app/components/Buttons/Button";
 import { Card } from "@/app/components/Cards/Card";
@@ -32,13 +33,12 @@ export function Login(){
       } = signUpForm
 
     const [output, SetOutput]=useState('')
-    const router = useRouter()
+   // const router = useRouter()
 //criando função para receber os dados
 
 
  async function acessLogin(data:LoginFormData )
 {   
-    
     debugger;
     try {
 
@@ -56,15 +56,14 @@ export function Login(){
             reset()
             SetOutput(JSON.stringify("Logado com sucesso!!!",null,2))
             //resolve:()=>router.push('/account')
-            router.push('/account')
             
         
     } catch (error) {}    
  }
     return(
          
-    <div className='text-center ite sm:text-left min-[320px]:text-center max-[600px]:bg-sky-300'>     
-        <div className='max-w-sm mx-auto m-10'>
+  
+        <DefaultLayoutLogin>
            <Card>
             <form onSubmit={handleSubmit(acessLogin)} className="space-y-6">
                  <div className="flex just items-center space-x-5">
@@ -109,9 +108,9 @@ export function Login(){
                 </form>
                 </Card>
                 <pre className=' text-black'>{output}</pre>
-             </div>
+                </DefaultLayoutLogin>
        
-        </div>
+    
       
         )   
 }
