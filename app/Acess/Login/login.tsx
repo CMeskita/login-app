@@ -1,14 +1,13 @@
 import { loginUser } from "@/app/api/loginUser";
 import { Button } from "@/app/components/Buttons/Button";
 import { Card } from "@/app/components/Cards/Card";
-
-import { Input } from "@/app/components/Inputs/Input";
-import {InputCheckbox} from "@/app/components/Inputs/InputCheckbox";
+import { Input ,InputType} from "@/app/components/Inputs/Input";
 import { FormaRedonda } from "@/app/components/Shapes/FormaRedonda";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { boolean, z } from "zod";
+import { z } from "zod";
 
 //validando campos
 const LoginSchema=z.object({
@@ -33,11 +32,13 @@ export function Login(){
       } = signUpForm
 
     const [output, SetOutput]=useState('')
+    const router = useRouter()
 //criando função para receber os dados
 
+
  async function acessLogin(data:LoginFormData )
- { 
-   
+{   
+    
     debugger;
     try {
 
@@ -48,10 +49,15 @@ export function Login(){
                 password:data.password,  
                               
             })
+            
+            //resolve:// () => router.push('/login?from=carrinho'),
             console.log(data)
             //window.history.go(-2);
             reset()
             SetOutput(JSON.stringify("Logado com sucesso!!!",null,2))
+            //resolve:()=>router.push('/account')
+            router.push('/account')
+            
         
     } catch (error) {}    
  }
@@ -71,7 +77,7 @@ export function Login(){
                             
                             <Input.Field 
                             id="email"
-                            type='email'
+                            type={InputType.email}
                             placeholder="Digite email"
                             {...register('email')}
                             />
